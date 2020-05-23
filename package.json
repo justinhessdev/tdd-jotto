@@ -1,7 +1,8 @@
 {
-  "name": "boilerplate",
-  "version": "1.0.0",
-  "description": "",
+  "name": "j-components-react",
+  "version": "5.0.0",
+  "description": "Easy-to-use React component library tailored to the end user",
+  "repository": "justinhessdev/j-components-react",
   "main": "dist/index.js",
   "scripts": {
     "bundle": "webpack",
@@ -11,7 +12,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "styled-components": "^5.1.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
@@ -20,6 +25,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-styled-components": "^1.10.7",
     "css-loader": "^3.5.3",
@@ -32,7 +38,6 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-standard": "^4.0.1",
     "html-webpack-plugin": "^4.3.0",
-    "j-components-react": "^4.0.2",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

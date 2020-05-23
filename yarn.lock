@@ -927,6 +927,14 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/hoist-non-react-statics@*":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+
 "@types/html-minifier-terser@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-5.1.0.tgz#551a4589b6ee2cc9c1dff08056128aec29b94880"
@@ -954,6 +962,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native@*":
+  version "0.62.11"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.62.11.tgz#12a19fbdd9709bcf2646f677f5ac49d4d474252b"
+  integrity sha512-hRJSROGw+3JIp2w4WAAA+/4YM/HApeOQul7FVxOzLduaMKV/YZnm+1bfkS7hhKp9JqlbFNgqoRY/p2Ut7AD47g==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.9.35":
   version "16.9.35"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
@@ -966,6 +981,16 @@
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
   integrity sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
+
+"@types/styled-components@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.0.tgz#24d3412ba5395aa06e14fbc93c52f9454cebd0d6"
+  integrity sha512-ZFlLCuwF5r+4Vb7JUmd+Yr2S0UBdBGmI7ctFTgJMypIp3xOHI4LCFVn2dKMvpk6xDB2hLRykrEWMBwJEpUAUIQ==
+  dependencies:
+    "@types/hoist-non-react-statics" "*"
+    "@types/react" "*"
+    "@types/react-native" "*"
+    csstype "^2.2.0"
 
 "@types/tapable@*", "@types/tapable@^1.0.5":
   version "1.0.5"
@@ -3237,7 +3262,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0:
+hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -3747,11 +3772,6 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
-
-j-components-react@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/j-components-react/-/j-components-react-4.0.2.tgz#024a0a20694171bc61a545d3ef23538c5dba405c"
-  integrity sha512-oj3ST4ZdHeZeSSYE0di24sNtpAGQAkNWOwKQg/cm2mtQD9NicgnjTPT+xeOIa29VJa/vV+eb4kz2VEgQa6w1yA==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
