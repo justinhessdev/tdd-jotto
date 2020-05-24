@@ -1,8 +1,7 @@
 import React from 'react'
-import sum from './sum'
 
 const App = () => {
-  return <div>Hello World {sum(1, 2)}</div>
+  return <div>Hello World</div>
 }
 
 export default App
