@@ -7,7 +7,7 @@ const App = () => {
     <AppWrapper>
       <GlobalStyle />
       <AppHeader>
-        <div>Hello World</div>
+        <div className='welcome-to-the-jungle'>Hello World</div>
         <Counter />
       </AppHeader>
     </AppWrapper>
