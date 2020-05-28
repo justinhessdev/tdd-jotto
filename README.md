@@ -1,5 +1,5 @@
-# Boilerplate app 
+# TDD Jotto word game app
 
-## React, Webpack, Babel, TypeScript, ESlint, Prettier
+## TDD
 
 MIT © [justinhessdev](https://github.com/justinhessdev)
