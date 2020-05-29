@@ -14,12 +14,9 @@ export const AppWrapper = styled.div`
   height: inherit;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
 `
-export const AppHeader = styled.div`
+export const JottoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 20em;
-  justify-content: center;
+  padding: 0 10em;
 `

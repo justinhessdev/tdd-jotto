@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { GuessedWordsTable } from './GuessedWords.styled'
 
 interface IProps {
   guessedWords: Array<{ guessedWord: string; letterMatchCount: number }>
@@ -21,8 +22,8 @@ const GuessedWords = (props: IProps) => {
     ))
     contents = (
       <div data-test='guessed-words'>
-        <h3>GuessedWords</h3>
-        <table>
+        <h2>Guessed Words</h2>
+        <GuessedWordsTable>
           <thead>
             <tr>
               <th>Guess</th>
@@ -30,7 +31,7 @@ const GuessedWords = (props: IProps) => {
             </tr>
           </thead>
           <tbody>{guessedWordsRow}</tbody>
-        </table>
+        </GuessedWordsTable>
       </div>
     )
   }

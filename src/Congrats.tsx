@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { CongratsWrapper } from './Congrats.styled'
 
 interface IProps {
   success: boolean
@@ -13,9 +14,11 @@ interface IProps {
 const Congrats = (props: IProps): JSX.Element => {
   if (props.success) {
     return (
-      <div data-test='component-congrats'>
-        <span data-test='congrats-message'>Congrats! You guessed the word</span>
-      </div>
+      <CongratsWrapper data-test='component-congrats'>
+        <span data-test='congrats-message'>
+          Congrats! You guessed the word!
+        </span>
+      </CongratsWrapper>
     )
   }
   return <div data-test='component-congrats'></div>
