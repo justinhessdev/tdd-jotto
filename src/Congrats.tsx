@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 interface IProps {
   success: boolean
@@ -9,7 +10,7 @@ interface IProps {
  * @param {object} props - React props.
  * @returns {JSX.Element} - rendered component or null if 'success' props is false
  */
-export default (props: IProps): JSX.Element => {
+const Congrats = (props: IProps): JSX.Element => {
   if (props.success) {
     return (
       <div data-test='component-congrats'>
@@ -18,4 +19,10 @@ export default (props: IProps): JSX.Element => {
     )
   }
   return <div data-test='component-congrats'></div>
+}
+
+export default Congrats
+
+Congrats.propTypes = {
+  success: PropTypes.bool.isRequired
 }

@@ -1,4 +1,8 @@
 /**
+ * Added typing.d.ts to src directory since that is where TypeScript is compiling code from which we configured in tsconfig.json
+ */
+
+/**
  * Default CSS definition for typescript,
  * will be overridden with file-specific definitions by webpack
  */
@@ -20,3 +24,5 @@ declare module '*.svg' {
 declare module '*.png'
 declare module '*.jpg'
 declare module '*.json'
+
+declare module 'check-prop-types'

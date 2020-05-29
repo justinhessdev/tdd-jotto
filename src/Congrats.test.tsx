@@ -1,10 +1,14 @@
 import React from 'react'
 import { shallow, ShallowWrapper } from 'enzyme'
+import { findByTestAttr, checkProps } from '../test/testUtils'
 import Congrats from './Congrats'
-import { findByTestAttr } from '../test/testUtils'
 
 interface IProps {
   success: boolean
+}
+
+const defaultProps = {
+  success: false
 }
 /**
  * Factory function to create a ShallowWrapper for the congrats component
@@ -12,8 +16,9 @@ interface IProps {
  * @param {object} props
  * @returns {ShallowWrapper}
  */
-const setup = (props: IProps = { success: false }): ShallowWrapper => {
-  return shallow(<Congrats success={props.success} />)
+const setup = (props?: IProps): ShallowWrapper => {
+  const setupProps = { ...defaultProps, ...props }
+  return shallow(<Congrats {...setupProps} />)
 }
 
 test('render Congrats without Error', () => {
@@ -32,4 +37,8 @@ test('redners non empty congrats message when `success` prop is true', () => {
   const wrapper = setup({ success: true })
   const message = findByTestAttr(wrapper, 'congrats-message')
   expect(message.text().length).not.toBe(0)
+})
+test('does not throw warning with expected props', () => {
+  const expectedProps = { success: false }
+  checkProps(Congrats, expectedProps)
 })
