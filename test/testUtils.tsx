@@ -1,17 +1,19 @@
 import { ShallowWrapper } from 'enzyme'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import checkPropTypes from 'check-prop-types'
 import rootReducer from '../src/reducers'
+import { middlewares } from '../src/configureStore'
 
 /**
  * Create a testing store with imoprted reducers, middleware, and intial state
- * globals: rootReducer
+ * globals: rootReducer, middleawres
  * @param {object} initialState - initial state for store
  * @function storeFactory
  * @returns {Store} - redux store
  */
 export const storeFactory = (initialState: any) => {
-  return createStore(rootReducer, initialState)
+  const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
+  return createStoreWithMiddleware(rootReducer, initialState)
 }
 
 /**
