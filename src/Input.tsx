@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-class Input extends Component {
+interface IProps {
+  success: boolean
+  store?: object // for our tests
+}
+
+class Input extends Component<IProps> {
   render() {
     const contents = this.props.success ? null : (
       <form className='form-inline'>
@@ -14,7 +19,7 @@ class Input extends Component {
     return <div data-test='component-input'>{contents}</div>
   }
 }
-const mapStateToProps = ({ success }) => {
+const mapStateToProps = ({ success }: { success: boolean }) => {
   return { success }
 }
 

@@ -10,6 +10,6 @@ export default (state = false, action: { type: string }) => {
     case actionTypes.CORRECT_GUESS:
       return true
     default:
-      return false
+      return state
   }
 }
