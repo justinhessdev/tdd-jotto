@@ -2,7 +2,6 @@ import React from 'react'
 import { shallow, ShallowWrapper } from 'enzyme'
 import { findByTestAttr, storeFactory } from '../test/testUtils'
 import Input from './Input'
-import { guessWord } from './actions'
 
 /**
  * Factory function to craete a ShallowWrapper for the GuessWords component

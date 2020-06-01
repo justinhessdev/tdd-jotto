@@ -1,23 +1,40 @@
 import React, { Component } from 'react'
-import { GlobalStyle, AppWrapper, JottoWrapper } from './App.styled'
+import { connect } from 'react-redux'
 import Congrats from './Congrats'
 import GuessedWords from './GuessedWords'
+import Input from './Input'
+import { getSecretWord } from './actions'
+import { GlobalStyle, AppWrapper, JottoWrapper } from './App.styled'
 
-class App extends Component {
+interface IApp {
+  store?: object // for testing
+  success: boolean
+  guessedWords: Array<{ guessedWord: string; letterMatchCount: number }>
+}
+class App extends Component<IApp> {
   render() {
+    const { success, guessedWords } = this.props
     return (
       <AppWrapper className='App'>
         <GlobalStyle />
         <JottoWrapper>
           <h1>Jotto</h1>
-          <Congrats success={true} />
-          <GuessedWords
-            guessedWords={[{ guessedWord: 'train', letterMatchCount: 3 }]}
-          />
+          <Congrats success={success} />
+          <Input />
+          <GuessedWords guessedWords={guessedWords} />
         </JottoWrapper>
       </AppWrapper>
     )
   }
 }
 
-export default App
+const mapStateToProps = (state: any) => {
+  const { success, guessedWords, secretWord } = state
+  return { success, guessedWords, secretWord }
+}
+
+const mapDispatchToProps = (dispatch: any) => ({
+  getSecretWord: dispatch(getSecretWord)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
