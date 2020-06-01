@@ -11,6 +11,7 @@ interface IApp {
   success: boolean
   guessedWords: Array<{ guessedWord: string; letterMatchCount: number }>
   getSecretWord: Function
+  secretWord: string
 }
 export class UnconnectedApp extends Component<IApp> {
   componentDidMount() {
@@ -25,6 +26,7 @@ export class UnconnectedApp extends Component<IApp> {
         <JottoWrapper>
           <h1>Jotto</h1>
           <Congrats success={success} />
+          <div>The secret word is {this.props.secretWord} </div>
           <Input />
           <GuessedWords guessedWords={guessedWords} />
         </JottoWrapper>
@@ -38,8 +40,11 @@ const mapStateToProps = (state: any) => {
   return { success, guessedWords, secretWord }
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  getSecretWord: dispatch(getSecretWord)
-})
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    // dispatching plain actions
+    getSecretWord: () => dispatch(getSecretWord())
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedApp)

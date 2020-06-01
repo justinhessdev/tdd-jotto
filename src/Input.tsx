@@ -24,6 +24,7 @@ export class UnconnectedInput extends Component<IProps, IState> {
     const guessedWord = this.state.currentGuess
     if (guessedWord && guessedWord.length > 0) {
       this.props.guessWord(guessedWord)
+      this.setState({ currentGuess: '' })
     }
   }
   render() {
@@ -52,8 +53,4 @@ const mapStateToProps = ({ success }: { success: boolean }) => {
   return { success }
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  guessWord: dispatch(guessWord)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedInput)
+export default connect(mapStateToProps, { guessWord })(UnconnectedInput)
