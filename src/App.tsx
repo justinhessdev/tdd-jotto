@@ -10,8 +10,13 @@ interface IApp {
   store?: object // for testing
   success: boolean
   guessedWords: Array<{ guessedWord: string; letterMatchCount: number }>
+  getSecretWord: Function
 }
-class App extends Component<IApp> {
+export class UnconnectedApp extends Component<IApp> {
+  componentDidMount() {
+    // get the secret Word
+    this.props.getSecretWord()
+  }
   render() {
     const { success, guessedWords } = this.props
     return (
@@ -37,4 +42,4 @@ const mapDispatchToProps = (dispatch: any) => ({
   getSecretWord: dispatch(getSecretWord)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedApp)
