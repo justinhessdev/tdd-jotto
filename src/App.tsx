@@ -1,50 +1,23 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import Congrats from './Congrats'
 import GuessedWords from './GuessedWords'
 import Input from './Input'
-import { getSecretWord } from './actions'
 import { GlobalStyle, AppWrapper, JottoWrapper } from './App.styled'
 
-interface IApp {
-  store?: object // for testing
-  success: boolean
-  guessedWords: Array<{ guessedWord: string; letterMatchCount: number }>
-  getSecretWord: Function
-  secretWord: string
-}
-export class UnconnectedApp extends Component<IApp> {
-  componentDidMount() {
-    // get the secret Word
-    this.props.getSecretWord()
-  }
-  render() {
-    const { success, guessedWords } = this.props
-    return (
-      <AppWrapper className='App'>
-        <GlobalStyle />
-        <JottoWrapper>
-          <h1>Jotto</h1>
-          <Congrats success={success} />
-          <div>The secret word is {this.props.secretWord} </div>
-          <Input />
-          <GuessedWords guessedWords={guessedWords} />
-        </JottoWrapper>
-      </AppWrapper>
-    )
-  }
+// interface IApp {
+//   store?: object // for testing
+//   success: boolean
+//   guessedWords: Array<{ guessedWord: string; letterMatchCount: number }>
+//   getSecretWord: Function
+//   secretWord: string
+// }
+function App() {
+  return (
+    <AppWrapper className='App' data-test='component-app'>
+      <GlobalStyle />
+      <JottoWrapper></JottoWrapper>
+    </AppWrapper>
+  )
 }
 
-const mapStateToProps = (state: any) => {
-  const { success, guessedWords, secretWord } = state
-  return { success, guessedWords, secretWord }
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    // dispatching plain actions
-    getSecretWord: () => dispatch(getSecretWord())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedApp)
+export default App
