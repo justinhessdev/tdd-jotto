@@ -7,10 +7,6 @@ export const actionTypes = {
   SET_SECRET_WORD: 'SET_SECRET_WORD'
 }
 
-interface ITypes {
-  type: string
-}
-
 /**
  * Returns Redux Thunk function that dispatches GUESS_WORD action
  * and conditionally CORRECT_GUESS action
@@ -36,7 +32,7 @@ export const guessWord = (guessedWord) => {
 }
 
 export const getSecretWord = () => {
-  return (dispatch) => {
+  return (dispatch: any) => {
     return axios.get('http://localhost:3030').then((response) => {
       dispatch({
         type: actionTypes.SET_SECRET_WORD,

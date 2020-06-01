@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow, ShallowWrapper } from 'enzyme'
 import { findByTestAttr, storeFactory } from '../test/testUtils'
 import Input from './Input'
+import { guessWord } from './actions'
 
 /**
  * Factory function to craete a ShallowWrapper for the GuessWords component
@@ -9,7 +10,7 @@ import Input from './Input'
  * @param {object} initialState - Initial state for this setup
  * @returns {ShallowWrapper}
  */
-const setup = (initialState = {}) => {
+const setup = (initialState: object = {}): ShallowWrapper => {
   const store = storeFactory(initialState)
   const wrapper = shallow(<Input store={store} />)
     .dive()
@@ -62,4 +63,39 @@ describe('render', () => {
   })
 })
 
-describe('update state', () => {})
+describe('redux props', () => {
+  test('has success piece of state as prop', () => {
+    const success = true
+    const wrapper: any = setup({ success })
+    const instance = wrapper.instance()
+    const instanceProps = instance.props
+    const successProp = instanceProps.success
+    expect(successProp).toBe(success)
+  })
+
+  test('guessWord action creator is a function prop', () => {
+    const wrapper: any = setup()
+    const guessWordProp = wrapper.instance().props.guessWord
+    expect(guessWordProp).toBeInstanceOf(Function)
+  })
+})
+
+/**
+ * HMMMM what is going on
+ * interface IShallowWrapper {
+  instance: () => {
+    props: { success: boolean }
+  }
+}
+
+describe('redux props', () => {
+  test('has success piece of state as prop', () => {
+    const success = true
+    const wrapper: ShallowWrapper<{},{}, IShallowWrapper> = setup({ success })
+    const instance = wrapper.instance()
+    const instanceProps = instance.props
+    const successProp = instanceProps.success
+    expect(successProp).toBe(success)
+  })
+})
+ */

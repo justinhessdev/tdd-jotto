@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { guessWord } from './actions'
 
 interface IProps {
   success: boolean
@@ -23,4 +24,8 @@ const mapStateToProps = ({ success }: { success: boolean }) => {
   return { success }
 }
 
-export default connect(mapStateToProps)(Input)
+const mapDispatchToProps = (dispatch: any) => ({
+  guessWord: dispatch(guessWord)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Input)
