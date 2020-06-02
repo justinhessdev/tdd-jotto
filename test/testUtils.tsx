@@ -1,4 +1,4 @@
-import { ShallowWrapper } from 'enzyme'
+import { ShallowWrapper, ReactWrapper } from 'enzyme'
 import { createStore, applyMiddleware } from 'redux'
 import checkPropTypes from 'check-prop-types'
 import rootReducer from '../src/reducers'
@@ -27,6 +27,19 @@ export const findByTestAttr = (
   val: string
 ): ShallowWrapper => {
   return wrapper.find(`[data-test="${val}"]`)
+}
+
+/**
+ * Returns first node with the given data-test attribute of styled component element (since styled components returns children element with same classnames)
+ * @param {ReactWrapper} wrapper - Enzyme React Wrapper.
+ * @param {string} val - Value of data-test attribute for search.
+ * @returns {ReactWrapper}
+ */
+export const findByMountStyledTestAttr = (
+  wrapper: ReactWrapper,
+  val: string
+): ReactWrapper => {
+  return wrapper.find(`[data-test="${val}"]`).first()
 }
 
 export const checkProps = (component: any, conformingProps: object) => {
