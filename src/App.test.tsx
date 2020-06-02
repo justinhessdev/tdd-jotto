@@ -6,10 +6,13 @@ import App from './App'
 import hookActions from './actions/hookActions'
 
 const mockGetSecretWord = jest.fn()
-const setup = (state: object = {}): ReactWrapper => {
+const setup = (secretWord = 'party'): ReactWrapper => {
   mockGetSecretWord.mockClear()
   hookActions.getSecretWord = mockGetSecretWord
 
+  const mockUseReducer = jest.fn().mockReturnValue([{ secretWord }, jest.fn()])
+
+  React.useReducer = mockUseReducer
   //use mount bcause useEffect not called on shallow
   // github/com/airbnb/ezyme/issue/2806
   return mount(<App />)
@@ -30,9 +33,41 @@ describe('getSecretWord calls', () => {
   })
 
   test('secretWord does not update on App update', () => {
-    const wrapper = setup()
+    const wrapper: any = setup()
     mockGetSecretWord.mockClear() // clear mock again since it runs once on mount -- so we are testing it does not get rendered again...
     wrapper.setProps()
     expect(mockGetSecretWord).not.toHaveBeenCalled()
+  })
+})
+
+describe('secretWord is not null', () => {
+  let wrapper: any
+  beforeEach(() => {
+    wrapper = setup('party')
+  })
+  test('renders app when secretWord is not null', () => {
+    const component = findByMountStyledTestAttr(wrapper, 'component-styled-app')
+    expect(component.exists()).toBe(true)
+  })
+
+  test('does not render spinner when secretWord is not null', () => {
+    const spinnerComponent = findByMountStyledTestAttr(wrapper, 'spinner')
+    expect(spinnerComponent.exists()).toBe(false)
+  })
+})
+
+describe('secretWord is null', () => {
+  let wrapper: any
+  beforeEach(() => {
+    wrapper = setup('')
+  })
+  test('does not render app when secretWord is null', () => {
+    const component = findByMountStyledTestAttr(wrapper, 'component-styled-app')
+    expect(component.exists()).toBe(false)
+  })
+
+  test('renders spinner when secretWord is null', () => {
+    const spinnerComponent = findByMountStyledTestAttr(wrapper, 'spinner')
+    expect(spinnerComponent.exists()).toBe(true)
   })
 })

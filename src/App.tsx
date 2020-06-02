@@ -1,4 +1,5 @@
 import React from 'react'
+import Input from './Input'
 import { GlobalStyle, AppWrapper, JottoWrapper } from './App.styled'
 import hookActions from './actions/hookActions'
 
@@ -27,14 +28,32 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, { secretWord: '' })
+
   const setSecretWord = (secretWord: string) =>
     dispatch({ type: 'setSecretWord', payload: secretWord })
+
   React.useEffect(() => {
     hookActions.getSecretWord(setSecretWord)
   }, [])
+
+  /**
+   * Add spinner UI...
+   */
+  if (!state.secretWord) {
+    return (
+      <div className='spinner' data-test='spinner'>
+        <div className='spinner-border' role='status'>
+          <span className='sr-only'>Loading...</span>
+          <p>Loading secret Word</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <AppWrapper className='App' data-test='component-styled-app'>
       <GlobalStyle />
+      <Input secretWord={state.secretWord} />
       <JottoWrapper></JottoWrapper>
     </AppWrapper>
   )
