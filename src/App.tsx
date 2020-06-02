@@ -1,7 +1,7 @@
 import React from 'react'
-import Congrats from './Congrats'
-import GuessedWords from './GuessedWords'
-import Input from './Input'
+// import Congrats from './Congrats'
+// import GuessedWords from './GuessedWords'
+// import Input from './Input'
 import { GlobalStyle, AppWrapper, JottoWrapper } from './App.styled'
 
 // interface IApp {

@@ -1,56 +1,46 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { guessWord } from './actions'
+import React from 'react'
+import PropTypes from 'prop-types'
+// import { guessWord } from './actions'
 
-interface IProps {
-  success: boolean
-  store?: object // for our tests,
-  guessWord: Function
+// interface IProps {
+//   success: boolean
+//   store?: object // for our tests,
+//   guessWord: Function
+// }
+
+// interface IState {
+//   currentGuess: string
+// }
+
+const Input = ({ secretWord }: { secretWord: string }) => {
+  const [currentGuess, setCurrentGuess] = React.useState('')
+  const contents = (
+    <form className='form-inline'>
+      <input
+        data-test='input-box'
+        type='text'
+        placeholder='enter guess'
+        value={currentGuess}
+        onChange={(evt) => setCurrentGuess(evt.target.value)}
+      />
+      <button
+        data-test='submit-button'
+        type='submit'
+        onClick={(evt) => {
+          evt.preventDefault()
+          setCurrentGuess('')
+        }}
+      >
+        Submit
+      </button>
+    </form>
+  )
+
+  return <div data-test='component-input'>{contents}</div>
 }
 
-interface IState {
-  currentGuess: string
+Input.propTypes = {
+  secretWord: PropTypes.string.isRequired
 }
 
-export class UnconnectedInput extends Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props)
-    this.state = { currentGuess: '' }
-    this.submitGuessedWord = this.submitGuessedWord.bind(this)
-  }
-
-  submitGuessedWord(evt) {
-    evt.preventDefault()
-    const guessedWord = this.state.currentGuess
-    if (guessedWord && guessedWord.length > 0) {
-      this.props.guessWord(guessedWord)
-      this.setState({ currentGuess: '' })
-    }
-  }
-  render() {
-    const contents = this.props.success ? null : (
-      <form className='form-inline'>
-        <input
-          data-test='input-box'
-          type='text'
-          placeholder='enter guess'
-          value={this.state.currentGuess}
-          onChange={(evt) => this.setState({ currentGuess: evt.target.value })}
-        />
-        <button
-          data-test='submit-button'
-          type='submit'
-          onClick={(evt) => this.submitGuessedWord(evt)}
-        >
-          Submit
-        </button>
-      </form>
-    )
-    return <div data-test='component-input'>{contents}</div>
-  }
-}
-const mapStateToProps = ({ success }: { success: boolean }) => {
-  return { success }
-}
-
-export default connect(mapStateToProps, { guessWord })(UnconnectedInput)
+export default Input
