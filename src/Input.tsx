@@ -12,7 +12,10 @@ const Input = ({ secretWord }: { secretWord: string }) => {
       <input
         data-test='input-box'
         type='text'
-        placeholder='enter guess'
+        placeholder={stringModule.getStringByLanguage(
+          language,
+          'guessInputPlaceholder'
+        )}
         value={currentGuess}
         onChange={(evt) => setCurrentGuess(evt.target.value)}
       />
