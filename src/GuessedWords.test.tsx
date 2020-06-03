@@ -1,35 +1,32 @@
 import React from 'react'
 import { shallow, ShallowWrapper } from 'enzyme'
-import { findByTestAttr, checkProps } from '../test/testUtils'
+import { findByTestAttr } from '../test/testUtils'
 import GuessedWords from './GuessedWords'
 
-interface IProps {
-  guessedWords: Array<{ guessedWord: string; letterMatchCount: number }>
-}
-
-const defaultProps = {
-  guessedWords: [{ guessedWord: 'train', letterMatchCount: 3 }]
+import guessedWordsContext from './contexts/guessedWordsContext'
+interface IGuessedWordsType {
+  guessedWord: string
+  letterMatchCount: number
 }
 
 /**
- * Factory function to create a ShallowWrapper for the GeussedWords component
+ * Factory function to create a ShallowWrapper for the GuessedWords component
  * @function setup
- * @param {object} props
+ * @param {object} guessedWords - guesssedWords value specific to this setup
  * @returns {ShallowWrapper}
  */
-const setup = (props: IProps): ShallowWrapper => {
-  const setupProps = { ...defaultProps, ...props }
-  return shallow(<GuessedWords {...setupProps} />)
+const setup = (guessedWords: Array<IGuessedWordsType> = []): ShallowWrapper => {
+  const mockUseGuessedWords = jest
+    .fn()
+    .mockReturnValue([guessedWords, jest.fn()])
+  guessedWordsContext.useGuessedWords = mockUseGuessedWords
+  return shallow(<GuessedWords />)
 }
-
-test('does not throw warning with expected props', () => {
-  checkProps(GuessedWords, defaultProps)
-})
 
 describe('if there are no words guessed', () => {
   let wrapper: ShallowWrapper
   beforeEach(() => {
-    wrapper = setup({ guessedWords: [] })
+    wrapper = setup([])
   })
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'component-guessed-words')
@@ -50,7 +47,7 @@ describe('if there are words guessed', () => {
     { guessedWord: 'party', letterMatchCount: 5 }
   ]
   beforeEach(() => {
-    wrapper = setup({ guessedWords })
+    wrapper = setup(guessedWords)
   })
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'component-guessed-words')
@@ -62,14 +59,14 @@ describe('if there are words guessed', () => {
   })
 
   test('correct number of guessed words', () => {
-    const guessedWordsNode = findByTestAttr(wrapper, 'guessed-word')
-    expect(guessedWordsNode.length).toBe(guessedWords.length)
+    const guessedWordNodes = findByTestAttr(wrapper, 'guessed-word')
+    expect(guessedWordNodes.length).toBe(guessedWords.length)
   })
 })
 
 describe('language picker', () => {
   test('correctly renders congrats string in english by default', () => {
-    const wrapper = setup({ guessedWords: [] }) // default language is `en`
+    const wrapper = setup([]) // default language is `en`
     const guessInstructions = findByTestAttr(wrapper, 'guess-instructions')
     expect(guessInstructions.text()).toBe('Try to guess the secret word!')
   })
@@ -77,7 +74,7 @@ describe('language picker', () => {
   test('correctly renders congrats string in emoji', () => {
     const mockUseContext = jest.fn().mockReturnValue('emoji')
     React.useContext = mockUseContext
-    const wrapper = setup({ guessedWords: [] })
+    const wrapper = setup([])
     const guessInstructions = findByTestAttr(wrapper, 'guess-instructions')
     expect(guessInstructions.text()).toBe('🤔🤫🔤')
   })
