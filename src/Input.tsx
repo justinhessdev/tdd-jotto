@@ -1,18 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { guessWord } from './actions'
 
-// interface IProps {
-//   success: boolean
-//   store?: object // for our tests,
-//   guessWord: Function
-// }
-
-// interface IState {
-//   currentGuess: string
-// }
+import LanguageContext from './contexts/languageContexts'
+import stringModule from './helpers/strings'
 
 const Input = ({ secretWord }: { secretWord: string }) => {
+  const language = React.useContext(LanguageContext)
   const [currentGuess, setCurrentGuess] = React.useState('')
   const contents = (
     <form className='form-inline'>
@@ -31,7 +24,7 @@ const Input = ({ secretWord }: { secretWord: string }) => {
           setCurrentGuess('')
         }}
       >
-        Submit
+        {stringModule.getStringByLanguage(language, 'submit')}
       </button>
     </form>
   )
