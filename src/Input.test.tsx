@@ -2,7 +2,7 @@ import React from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import { findByMountStyledTestAttr, checkProps } from '../test/testUtils'
 import Input from './Input'
-import LanguageContext from './contexts/languageContexts'
+import languageContext from './contexts/languageContext'
 // import { guessWord } from './actions'
 
 /**
@@ -13,9 +13,9 @@ import LanguageContext from './contexts/languageContexts'
  */
 const setup = ({ secretWord = 'party', language = 'en' }): ReactWrapper => {
   return mount(
-    <LanguageContext.Provider value={language}>
+    <languageContext.Provider value={language}>
       <Input secretWord={secretWord} />
-    </LanguageContext.Provider>
+    </languageContext.Provider>
   )
 }
 

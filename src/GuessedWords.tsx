@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import LanguageContext from './contexts/languageContexts'
+import languageContext from './contexts/languageContext'
 import stringModule from './helpers/strings'
 
 import { GuessedWordsTable } from './GuessedWords.styled'
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const GuessedWords = (props: IProps) => {
-  const language = React.useContext(LanguageContext)
+  const language = React.useContext(languageContext)
   const { guessedWords } = props
   let contents: JSX.Element = <></>
   if (guessedWords.length === 0) {

@@ -1,9 +1,12 @@
 import React from 'react'
-import { GlobalStyle, AppWrapper, JottoWrapper } from './App.styled'
 import hookActions from './actions/hookActions'
-import LanguageContext from './contexts/languageContexts'
+import successContext from './contexts/successContext'
+import languageContext from './contexts/languageContext'
 import LanguagePicker from './languagePicker'
+import Congrats from './Congrats'
+import Guesswords from './GuessedWords'
 import Input from './Input'
+import { GlobalStyle, AppWrapper, JottoWrapper } from './App.styled'
 
 // interface IApp {
 //   store?: object // for testing
@@ -64,11 +67,15 @@ function App() {
     <AppWrapper className='App' data-test='component-styled-app'>
       <GlobalStyle />
       <h1>Jotto</h1>
-      <LanguageContext.Provider value={state.language}>
+      <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage}></LanguagePicker>
-        <Input secretWord={state.secretWord} />
+        <successContext.SuccessProvider>
+          <Congrats />
+          <Input secretWord={state.secretWord} />
+        </successContext.SuccessProvider>
+        {/* <Guesswords /> */}
         <JottoWrapper></JottoWrapper>
-      </LanguageContext.Provider>
+      </languageContext.Provider>
     </AppWrapper>
   )
 }

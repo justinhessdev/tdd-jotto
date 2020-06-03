@@ -1,22 +1,18 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { CongratsWrapper } from './Congrats.styled'
-
-import LanguageContext from './contexts/languageContexts'
+import languageContext from './contexts/languageContext'
+import successContext from './contexts/successContext'
 import stringModule from './helpers/strings'
 
-interface IProps {
-  success: boolean
-}
 /**
  * Functional Component for congratulatory message
  * @function
- * @param {object} props - React props.
- * @returns {JSX.Element} - rendered component or null if 'success' props is false
+ * @returns {JSX.Element} - rendered component or null if 'success' is false
  */
-const Congrats = (props: IProps): JSX.Element => {
-  const language = React.useContext(LanguageContext)
-  if (props.success) {
+const Congrats = (): JSX.Element => {
+  const [success] = successContext.useSuccess()
+  const language = React.useContext(languageContext)
+  if (success) {
     return (
       <CongratsWrapper data-test='component-congrats'>
         <span data-test='congrats-message'>
@@ -29,7 +25,3 @@ const Congrats = (props: IProps): JSX.Element => {
 }
 
 export default Congrats
-
-Congrats.propTypes = {
-  success: PropTypes.bool.isRequired
-}

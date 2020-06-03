@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import LanguageContext from './contexts/languageContexts'
+import languageContext from './contexts/languageContext'
 import stringModule from './helpers/strings'
 
 const Input = ({ secretWord }: { secretWord: string }) => {
-  const language = React.useContext(LanguageContext)
+  const language = React.useContext(languageContext)
   const [currentGuess, setCurrentGuess] = React.useState('')
   const contents = (
     <form className='form-inline'>
