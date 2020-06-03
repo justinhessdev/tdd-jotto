@@ -1,7 +1,9 @@
 import React from 'react'
-import Input from './Input'
 import { GlobalStyle, AppWrapper, JottoWrapper } from './App.styled'
 import hookActions from './actions/hookActions'
+import LanguageContext from './contexts/languageContexts'
+import LanguagePicker from './languagePicker'
+import Input from './Input'
 
 // interface IApp {
 //   store?: object // for testing
@@ -21,16 +23,24 @@ function reducer(state, action) {
   switch (action.type) {
     case 'setSecretWord':
       return { ...state, secretWord: action.payload }
+    case 'setLanguage':
+      return { ...state, language: action.payload }
     default:
       throw new Error(`Invalid action type ${action.type}`)
   }
 }
 
 function App() {
-  const [state, dispatch] = React.useReducer(reducer, { secretWord: '' })
+  const [state, dispatch] = React.useReducer(reducer, {
+    secretWord: '',
+    language: 'en'
+  })
 
   const setSecretWord = (secretWord: string) =>
     dispatch({ type: 'setSecretWord', payload: secretWord })
+
+  const setLanguage = (language: string) =>
+    dispatch({ type: 'setLanguage', payload: language })
 
   React.useEffect(() => {
     hookActions.getSecretWord(setSecretWord)
@@ -53,8 +63,12 @@ function App() {
   return (
     <AppWrapper className='App' data-test='component-styled-app'>
       <GlobalStyle />
-      <Input secretWord={state.secretWord} />
-      <JottoWrapper></JottoWrapper>
+      <h1>Jotto</h1>
+      <LanguageContext.Provider value={state.language}>
+        <LanguagePicker setLanguage={setLanguage}></LanguagePicker>
+        <Input secretWord={state.secretWord} />
+        <JottoWrapper></JottoWrapper>
+      </LanguageContext.Provider>
     </AppWrapper>
   )
 }

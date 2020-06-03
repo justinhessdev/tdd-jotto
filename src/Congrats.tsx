@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CongratsWrapper } from './Congrats.styled'
 
+import LanguageContext from './contexts/languageContexts'
+import stringModule from './helpers/strings'
+
 interface IProps {
   success: boolean
 }
@@ -12,11 +15,12 @@ interface IProps {
  * @returns {JSX.Element} - rendered component or null if 'success' props is false
  */
 const Congrats = (props: IProps): JSX.Element => {
+  const language = React.useContext(LanguageContext)
   if (props.success) {
     return (
       <CongratsWrapper data-test='component-congrats'>
         <span data-test='congrats-message'>
-          Congrats! You guessed the word!
+          {stringModule.getStringByLanguage(language, 'congrats')}
         </span>
       </CongratsWrapper>
     )
